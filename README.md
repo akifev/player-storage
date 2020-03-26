@@ -1,4 +1,5 @@
 # Player Storage
+[![](https://jitpack.io/v/akifev/player-storage.svg)](https://jitpack.io/#akifev/player-storage)
 
 This is a library for managing the storage of players with the ability
 to add or update, delete, get a rank, and roll back.
