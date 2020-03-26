@@ -1,37 +1,107 @@
-## Welcome to GitHub Pages
+# Player Storage
 
-You can use the [editor on GitHub](https://github.com/akifev/player-storage/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+This is a library for managing the storage of players with the ability
+to add or update, delete, get a rank, and roll back.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Table Of Contents
+<!--ts-->
+   * [Overview](#overview)
+        * [Operations](#operations)
+   * [Using in your project](#using-in-your-project)
+        * [Maven](#maven)
+        * [Gradle](#gradle)
+   * [Performance](#performance)
+        * [JMH Benchmark](#jmh-benchmark)
+<!--te-->
 
-### Markdown
+## Overview
+This library contains the thread-safe class PlayerStorage which implements interface Storage.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Operations
+Class PlayerStorage implements the following methods.
 
-```markdown
-Syntax highlighted code block
+#### registerPlayerResult
+Adds a player with a rating or updates a player rating, if one has been already added.  
 
-# Header 1
-## Header 2
-### Header 3
+```kotlin
+@Synchronized
+fun registerPlayerResult(playerName: String, playerRating: Int): Boolean
+```
+**Note:** This method is marked as @Synchronized.
 
-- Bulleted
-- List
+#### unregisterPlayer
+Deletes the player from the storage.
 
-1. Numbered
-2. List
+```kotlin
+@Synchronized
+fun unregisterPlayer(playerName: String): Boolean
+```
+**Note:** This method is marked as @Synchronized.
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+#### getPlayerRank
+Returns player rank. Rank is a position in the rating table. 
+```kotlin
+fun getPlayerRank(playerName: String): Int?
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+#### rollback
+Rolls the last [step] registerPlayerResult or unregisterPlayer invocations back.
+```kotlin
+@Synchronized
+fun rollback(step: Int): Boolean
+```
+**Note:** This method is marked as @Synchronized.
 
-### Jekyll Themes
+## Using in your project
+The library published to JitPack repository.
+### Maven
+Step 1. Add the JitPack repository to your build file.
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/akifev/player-storage/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```xml
+<repositories>
+    <repository>
+        <id>jitpack.io</id>
+        <url>https://jitpack.io</url>
+    </repository>
+</repositories>
+```
 
-### Support or Contact
+Step 2. Add the dependency.
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```xml
+<dependency>
+    <groupId>com.github.akifev</groupId>
+    <artifactId>player-storage</artifactId>
+    <version>1.0</version>
+</dependency>
+```
+### Gradle
+Step 1. Add the JitPack repository to your build file.
+
+```groovy
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+
+Step 2. Add the dependency.
+
+```groovy
+dependencies {
+        implementation 'com.github.akifev:player-storage:1.0'
+}
+```
+
+## Performance
+### JMH Benchmark 
+Here is the relation of average operation execution time to the quantity of players added to the storage.   
+
+|Quantity of players | 14    | 62    | 1022  | 8190  | 65534 |         |
+|:-------------------|:-----:|:-----:|:-----:|:-----:|:-----:|--------:|
+|registerPlayerResult|307    |510    |1079   |1984   |4156   |ns/op    |
+|unregisterPlayer    |313    |585    |1123   |1974   |4385   |ns/op    |
+|getPlayerRank       |135    |239    |544    |1104   |2328   |ns/op    |
+|rollback            |58     |50     |59     |31     |9      |ns/op    |
