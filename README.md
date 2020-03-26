@@ -72,7 +72,7 @@ Step 2. Add the dependency.
 <dependency>
     <groupId>com.github.akifev</groupId>
     <artifactId>player-storage</artifactId>
-    <version>v1.1</version>
+    <version>2.0</version>
 </dependency>
 ```
 ### Gradle
@@ -91,7 +91,7 @@ Step 2. Add the dependency.
 
 ```groovy
 dependencies {
-        implementation 'com.github.akifev:player-storage:v1.1'
+        implementation 'com.github.akifev:player-storage:2.0'
 }
 ```
 
