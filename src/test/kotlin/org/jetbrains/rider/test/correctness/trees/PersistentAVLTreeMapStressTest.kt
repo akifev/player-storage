@@ -13,12 +13,12 @@ internal class PersistentAVLTreeMapStressTest {
     private var testMap: PersistentMap<String, Int> = persistentMapOf()
 
     private val random: Random = Random(0)
-    private val playerGenerator = PlayerGenerator("abAB", 1, 2, -5, 5)
+    private val playerGenerator = PlayerGenerator("abAB", 1, 2, -5, 5) // YOU MAY CHANGE ME
     private val availableNames = playerGenerator.getAvailableNames()
 
     @Test
     fun testStress() {
-        repeat(100_000) {
+        repeat(100_000) { // CHANGE ME, IF YOU KNOW THE CONSEQUENCES
             when (random.nextInt(2)) {
                 0 -> { // add
                     val key = playerGenerator.generateName()

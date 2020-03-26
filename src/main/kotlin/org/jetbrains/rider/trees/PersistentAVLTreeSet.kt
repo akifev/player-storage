@@ -2,7 +2,15 @@ package org.jetbrains.rider.trees
 
 import kotlin.math.max
 
+/**
+ * @author akifev
+ *
+ * Persistent set based on AVL tree
+ */
 internal class PersistentAVLTreeSet<K : Comparable<K>>() {
+    /**
+     * Private class Node for defining AVL tree node
+     */
     private class Node<K: Comparable<K>>(
         var key: K,
 
@@ -26,18 +34,47 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
 
     private constructor(node: Node<K>?) : this() { root = node }
 
+    /**
+     * Adds a key to the tree.
+     * Creates new tree version. Current tree version remains the same.
+     *
+     * @param key is a key in the tree to be added
+     *
+     * @return a new instance of class with added key
+     */
     fun add(key: K): PersistentAVLTreeSet<K> {
         return PersistentAVLTreeSet(add(root, key))
     }
 
+    /**
+     * Returns a key from the tree or null, if there is no such a key.
+     *
+     * @param key to be found
+     *
+     * @return found key or null, if there is no such a key
+     */
     fun get(key: K): K? {
         return find(key)?.key
     }
 
+    /**
+     * Returns true if tree contains a key. Otherwise, returns false.
+     *
+     * @param key to be found
+     *
+     * @return true if tree contains a key. Otherwise, returns false
+     */
     fun contains(key: K): Boolean {
         return get(key) != null
     }
 
+    /**
+     * Retunes the quantity of elements greater than a key or null, if there is no such a key.
+     *
+     * @param key to be compared
+     *
+     * @return the quantity of elements greater than a key or null, if there is no such a key
+     */
     fun getPosition(key: K): Int? {
         var result = 0
         var current: Node<K>? = root
@@ -55,10 +92,21 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
         return null
     }
 
+    /**
+     * Removes a key from the tree.
+     * Creates new tree version. Current tree version remains the same.
+     *
+     * @param key is a key in the tree to be removed
+     *
+     * @return a new instance of class without removed key
+     */
     fun remove(key: K): PersistentAVLTreeSet<K> {
         return PersistentAVLTreeSet(remove(root, key))
     }
 
+    /**
+     * Non-recursively finds of node associated with a key. Returns found node or null, if there is no such a key.
+     */
     private fun find(key: K) : Node<K>? {
         var current: Node<K>? = root
         while (current != null) {
@@ -72,6 +120,12 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
         return null
     }
 
+    /**
+     * Recursively adds a node associated with a key to the node subtree.
+     * Returns a new node subtree with an added node.
+     * Creates new tree version. Current tree version remains the same.
+     * Creates a logarithm of subtree height of new nodes.
+     */
     private fun add(node: Node<K>?, key: K): Node<K> {
         return when {
             node == null -> Node(key)
@@ -81,6 +135,12 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
         }
     }
 
+    /**
+     * Recursively removes a node associated with a key from the node subtree.
+     * Returns a new node subtree without a removed node or null, if the last element of subtree has been removed.
+     * Creates new tree version. Current tree version remains the same.
+     * Creates a logarithm of subtree height of new nodes.
+     */
     private fun remove(node: Node<K>?, key: K): Node<K>? {
         when {
             node == null -> return null
@@ -103,6 +163,10 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
         }
     }
 
+    /**
+     * Non-recursively finds the maximum key in the node subtree.
+     * Returns a node associated with the key.
+     */
     private fun findMax(node: Node<K>): Node<K> {
         var current: Node<K> = node
         while (true) {
@@ -110,6 +174,10 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
         }
     }
 
+    /**
+     * Recursively balances the node subtree.
+     * Returns balanced node subtree.
+     */
     private fun balance(node: Node<K>): Node<K> {
         node.fix()
         return when {
@@ -127,21 +195,31 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
         }
     }
 
+    /**
+     * Right rotation in AVL tree.
+     * Returns rotated node subtree.
+     */
     private fun rotateRight(node: Node<K>): Node<K> {
         val next = node.leftChild!!
         node.leftChild = next.rightChild
         next.rightChild = node
         node.fix()
         next.fix()
+
         return next
     }
 
+    /**
+     * Left rotation in AVL tree.
+     * Returns rotated node subtree.
+     */
     private fun rotateLeft(node: Node<K>): Node<K> {
         val next = node.rightChild!!
         node.rightChild = next.leftChild
         next.leftChild = node
         node.fix()
         next.fix()
+
         return next
     }
 }

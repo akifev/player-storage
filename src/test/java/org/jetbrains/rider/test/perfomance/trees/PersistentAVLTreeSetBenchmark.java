@@ -9,25 +9,25 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @OutputTimeUnit(value = TimeUnit.NANOSECONDS)
 @BenchmarkMode(Mode.AverageTime)
-@Warmup(iterations = 30, time = 300, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 30, time = 300, timeUnit = TimeUnit.MILLISECONDS)
-@Fork(value = 3)
+@Warmup(iterations = 30, time = 300, timeUnit = TimeUnit.MILLISECONDS) // YOU MAY CHANGE ME
+@Measurement(iterations = 30, time = 300, timeUnit = TimeUnit.MILLISECONDS) // YOU MAY CHANGE ME
+@Fork(value = 3) // YOU MAY CHANGE ME
 @State(Scope.Benchmark)
 public class PersistentAVLTreeSetBenchmark {
     private PersistentAVLTreeSet<Player> set;
-    private ArrayList<String> playerNames;
+    private List<String> playerNames;
     private Random random;
 
     @Setup
     public void trialSetup() {
         set = new PersistentAVLTreeSet<>();
-        playerNames = new PlayerGenerator("ab", 1, 3, 1, 1).getAvailableNames();
+        playerNames = new PlayerGenerator("ab", 1, 3, 1, 1).getAvailableNames(); // CHANGE ME, AS IT'S SUGGESTED IN PlayerStorageBenchmark CLASS
         random = new Random();
         for (String name : playerNames) {
             set.add(new Player(name, 1));
@@ -67,7 +67,7 @@ public class PersistentAVLTreeSetBenchmark {
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(PersistentAVLTreeSetBenchmark.class.getSimpleName())
-                .threads(1)
+                .threads(1) // CHANGE ME, IF YOU KNOW THE CONSEQUENCES
                 .build();
         new Runner(opt).run();
     }

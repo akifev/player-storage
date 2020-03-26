@@ -8,6 +8,13 @@ import org.jetbrains.kotlinx.lincheck.verifier.VerifierState
 import org.jetbrains.rider.Player
 import org.jetbrains.rider.Storage
 
+/**
+ * @author akifev
+ *
+ * Sequential specification PlayerStorage class.
+ * Implements Storage interface.
+ * Extends VerifierState and override extractState() method for checking state equivalents in LinChecker.
+ */
 internal class SequentialPlayerStorage : Storage, VerifierState() {
     private var mapVersions: MutableList<PersistentMap<String, Int>> = mutableListOf(persistentMapOf())
     private var setVersions: MutableList<PersistentSet<Player>> = mutableListOf(persistentSetOf())

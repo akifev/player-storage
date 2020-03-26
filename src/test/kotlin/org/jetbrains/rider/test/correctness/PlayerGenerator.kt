@@ -4,6 +4,9 @@ import org.jetbrains.rider.Player
 import kotlin.math.pow
 import kotlin.random.Random
 
+/**
+ *
+ */
 internal class PlayerGenerator(
     private val alphabet: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_",
     private val minNameLength: Int = 1,
@@ -27,7 +30,7 @@ internal class PlayerGenerator(
         return Player(generateName(), generateRating())
     }
 
-    fun getAvailableNames(): ArrayList<String> {
+    fun getAvailableNames(): MutableList<String> {
         val names: MutableList<String> = mutableListOf()
         val aSize = alphabet.length
 
@@ -41,10 +44,10 @@ internal class PlayerGenerator(
             }
         }
 
-        return names as ArrayList<String>
+        return names
     }
 
-    fun getAvailablePlayers(): ArrayList<Player> {
+    fun getAvailablePlayers(): MutableList<Player> {
         val players: MutableList<Player> = mutableListOf()
 
         getAvailableNames().forEach { name ->
@@ -53,6 +56,6 @@ internal class PlayerGenerator(
             }
         }
 
-        return players as ArrayList<Player>
+        return players
     }
 }

@@ -10,14 +10,13 @@ internal class StressTest {
     private val myPlayerStorage: Storage = PlayerStorage()
     private val testPlayerStorage: Storage = SequentialPlayerStorage()
 
-
     private val random: Random = Random(0)
-    private val playerGenerator = PlayerGenerator("ab", 1, 3, -5, 5)
+    private val playerGenerator = PlayerGenerator("ab", 1, 3, -5, 5) // YOU MAY CHANGE ME
     private val availableNames = playerGenerator.getAvailableNames()
 
     @Test
     fun testStress() {
-        repeat(1_000_000) {
+        repeat(1_000_000) { // CHANGE ME, IF YOU KNOW THE CONSEQUENCES
             when (random.nextInt(3)) {
                 0 -> { // registerPlayerResult
                     val name = playerGenerator.generateName()
