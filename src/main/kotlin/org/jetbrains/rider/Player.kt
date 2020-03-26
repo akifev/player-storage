@@ -2,6 +2,12 @@ package org.jetbrains.rider
 
 import kotlin.math.min
 
+/**
+ * @author akifev
+ *
+ * Class for storing player information. Overrides method compareTo() for ordering the rating table.
+ * Also, overrides toString() and hashCode() methods.
+ */
 internal class Player(
     private val name: String,
     private val rating: Int

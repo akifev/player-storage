@@ -12,6 +12,10 @@ import org.jetbrains.rider.PlayerStorage
 import org.jetbrains.rider.Storage
 import org.junit.Test
 
+/**
+ * LinearizabilityTest class for testing PlayerStorage class operations on multi-threaded execution.
+ * Checks PlayerStorage class to be thread-safe and to satisfy correctness criteria - linearizability.
+ */
 @LogLevel(LoggingLevel.DEBUG)
 @StressCTest(sequentialSpecification = SequentialPlayerStorage::class)
 //@StressCTest(actorsBefore = 0, threads = 3, actorsPerThread = 2, invocationsPerIteration = 20_000, sequentialSpecification = SequentialPlayerStorage::class)

@@ -3,6 +3,12 @@ package org.jetbrains.rider
 import org.jetbrains.rider.trees.PersistentAVLTreeMap
 import org.jetbrains.rider.trees.PersistentAVLTreeSet
 
+/**
+ * @author akifev
+ *
+ * Thread-safe class PlayerStorage for storing players with ratings.
+ * Implements Storage interface.
+ */
 class PlayerStorage : Storage {
     private var mapVersions: MutableList<PersistentAVLTreeMap<String, Int>> = mutableListOf(PersistentAVLTreeMap())
     private var setVersions: MutableList<PersistentAVLTreeSet<Player>> = mutableListOf(PersistentAVLTreeSet())
@@ -48,8 +54,6 @@ class PlayerStorage : Storage {
         updateLatestVersion()
 
         return true
-
-
     }
 
     override fun getPlayerRank(playerName: String): Int? {

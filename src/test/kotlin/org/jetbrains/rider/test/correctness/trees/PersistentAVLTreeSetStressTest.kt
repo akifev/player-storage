@@ -14,12 +14,12 @@ internal class PersistentAVLTreeSetStressTest {
     private var testSet: PersistentSet<Player> = persistentSetOf()
 
     private val random: Random = Random(0)
-    private val playerGenerator = PlayerGenerator("abAB", 1, 2, -5, 5)
+    private val playerGenerator = PlayerGenerator("abAB", 1, 2, -5, 5) // YOU MAY CHANGE ME
     private val availablePlayers = playerGenerator.getAvailablePlayers()
 
     @Test
     fun testStress() {
-        repeat(100_000) {
+        repeat(100_000) { // CHANGE ME, IF YOU KNOW THE CONSEQUENCES
             when (random.nextInt(2)) {
                 0 -> { // add
                     val key = playerGenerator.generatePlayer()

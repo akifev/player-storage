@@ -9,26 +9,26 @@ import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 @OutputTimeUnit(value = TimeUnit.NANOSECONDS)
-@Warmup(iterations = 30, time = 1000, timeUnit = TimeUnit.MILLISECONDS)
-@Measurement(iterations = 30, time = 1000, timeUnit = TimeUnit.MILLISECONDS)
+@BenchmarkMode(Mode.AverageTime)
+@Warmup(iterations = 30, time = 1000, timeUnit = TimeUnit.MILLISECONDS) // YOU MAY CHANGE ME
+@Measurement(iterations = 30, time = 1000, timeUnit = TimeUnit.MILLISECONDS) // YOU MAY CHANGE ME
 //@OperationsPerInvocation(14) // 14 users
 //@OperationsPerInvocation(62) // 62 users
 //@OperationsPerInvocation(1022) // 1022 users
 @OperationsPerInvocation(8190) // 8190 users
 //@OperationsPerInvocation(65534) // 65534 users
 //@OperationsPerInvocation(524286) // 524286 users
-@BenchmarkMode(Mode.AverageTime)
-@Fork(value = 3)
+@Fork(value = 3) // YOU MAY CHANGE ME
 @State(Scope.Benchmark)
 public class PlayerStorageBenchmark {
     private Storage playerStorage;
-    private ArrayList<String> playerNames;
+    private List<String> playerNames;
 
     @Setup
     public void trialSetup() {
@@ -99,7 +99,7 @@ public class PlayerStorageBenchmark {
     public static void main(String[] args) throws RunnerException {
         Options opt = new OptionsBuilder()
                 .include(PlayerStorageBenchmark.class.getSimpleName())
-                .threads(1)
+                .threads(1) // CHANGE ME, IF YOU KNOW THE CONSEQUENCES
                 .build();
         new Runner(opt).run();
     }
