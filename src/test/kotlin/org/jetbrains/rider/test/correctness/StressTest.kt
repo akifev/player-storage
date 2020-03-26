@@ -6,6 +6,10 @@ import org.junit.Test
 import kotlin.random.Random
 import kotlin.test.assertEquals
 
+/**
+ * Stress-test for PlayerStorage class.
+ * One thread. Many operations.
+ */
 internal class StressTest {
     private val myPlayerStorage: Storage = PlayerStorage()
     private val testPlayerStorage: Storage = SequentialPlayerStorage()

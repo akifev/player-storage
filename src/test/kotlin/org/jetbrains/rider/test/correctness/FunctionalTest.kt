@@ -5,6 +5,9 @@ import org.jetbrains.rider.Storage
 import org.junit.Test
 import kotlin.test.assertEquals
 
+/**
+ * Class tests basic functionality PlayerStorage.
+ */
 internal class FunctionalTest {
     private val storage: Storage = PlayerStorage()
 

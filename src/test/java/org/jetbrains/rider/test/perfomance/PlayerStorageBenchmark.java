@@ -14,6 +14,9 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * JMH Benchmark for PlayerStorage class.
+ */
 @OutputTimeUnit(value = TimeUnit.NANOSECONDS)
 @BenchmarkMode(Mode.AverageTime)
 @Warmup(iterations = 30, time = 1000, timeUnit = TimeUnit.MILLISECONDS) // YOU MAY CHANGE ME
@@ -53,7 +56,7 @@ public class PlayerStorageBenchmark {
     public Storage unregisterPlayer() {
         playerStorage = new PlayerStorage();
 
-        filling();
+        filling(); // subtract registerPlayerResult from the result
 
         for (String name : playerNames) {
             playerStorage.unregisterPlayer(name);
@@ -66,7 +69,7 @@ public class PlayerStorageBenchmark {
     public Storage getPlayerRank() {
         playerStorage = new PlayerStorage();
 
-        filling();
+        filling(); // subtract registerPlayerResult from the result
 
         for (String name : playerNames) {
             playerStorage.getPlayerRank(name);
@@ -79,7 +82,7 @@ public class PlayerStorageBenchmark {
     public Storage rollback() {
         playerStorage = new PlayerStorage();
 
-        filling();
+        filling(); // subtract registerPlayerResult from the result
 
         for (String ignored : playerNames) {
             playerStorage.rollback(1);

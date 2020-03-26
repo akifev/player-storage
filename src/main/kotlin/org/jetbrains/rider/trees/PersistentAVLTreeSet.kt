@@ -5,11 +5,11 @@ import kotlin.math.max
 /**
  * @author akifev
  *
- * Persistent set based on AVL tree
+ * Persistent set based on AVL tree.
  */
 internal class PersistentAVLTreeSet<K : Comparable<K>>() {
     /**
-     * Private class Node for defining AVL tree node
+     * Private class Node for defining AVL tree node.
      */
     private class Node<K: Comparable<K>>(
         var key: K,
@@ -38,9 +38,9 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
      * Adds a key to the tree.
      * Creates new tree version. Current tree version remains the same.
      *
-     * @param key is a key in the tree to be added
+     * @param key is a key in the tree to be added.
      *
-     * @return a new instance of class with added key
+     * @return a new instance of class with added key.
      */
     fun add(key: K): PersistentAVLTreeSet<K> {
         return PersistentAVLTreeSet(add(root, key))
@@ -49,9 +49,9 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
     /**
      * Returns a key from the tree or null, if there is no such a key.
      *
-     * @param key to be found
+     * @param key to be found.
      *
-     * @return found key or null, if there is no such a key
+     * @return found key or null, if there is no such a key.
      */
     fun get(key: K): K? {
         return find(key)?.key
@@ -60,9 +60,9 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
     /**
      * Returns true if tree contains a key. Otherwise, returns false.
      *
-     * @param key to be found
+     * @param key to be found.
      *
-     * @return true if tree contains a key. Otherwise, returns false
+     * @return true if tree contains a key. Otherwise, returns false.
      */
     fun contains(key: K): Boolean {
         return get(key) != null
@@ -71,9 +71,9 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
     /**
      * Retunes the quantity of elements greater than a key or null, if there is no such a key.
      *
-     * @param key to be compared
+     * @param key to be compared.
      *
-     * @return the quantity of elements greater than a key or null, if there is no such a key
+     * @return the quantity of elements greater than a key or null, if there is no such a key.
      */
     fun getPosition(key: K): Int? {
         var result = 0
@@ -96,9 +96,9 @@ internal class PersistentAVLTreeSet<K : Comparable<K>>() {
      * Removes a key from the tree.
      * Creates new tree version. Current tree version remains the same.
      *
-     * @param key is a key in the tree to be removed
+     * @param key is a key in the tree to be removed.
      *
-     * @return a new instance of class without removed key
+     * @return a new instance of class without removed key.
      */
     fun remove(key: K): PersistentAVLTreeSet<K> {
         return PersistentAVLTreeSet(remove(root, key))

@@ -9,6 +9,10 @@ import org.junit.Test
 import kotlin.random.Random
 import kotlin.test.assertEquals
 
+/**
+ * Stress-test for PersistentAVLTreeSet class.
+ * One thread. Many operations.
+ */
 internal class PersistentAVLTreeSetStressTest {
     private var mySet: PersistentAVLTreeSet<Player> = PersistentAVLTreeSet()
     private var testSet: PersistentSet<Player> = persistentSetOf()

@@ -8,6 +8,10 @@ import org.junit.Test
 import kotlin.random.Random
 import kotlin.test.assertEquals
 
+/**
+ * Stress-test for PersistentAVLTreeMap class.
+ * One thread. Many operations.
+ */
 internal class PersistentAVLTreeMapStressTest {
     private var myMap: PersistentAVLTreeMap<String, Int> = PersistentAVLTreeMap()
     private var testMap: PersistentMap<String, Int> = persistentMapOf()

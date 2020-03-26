@@ -5,7 +5,7 @@ import kotlin.math.pow
 import kotlin.random.Random
 
 /**
- *
+ * PlayerGenerator class to generate players.
  */
 internal class PlayerGenerator(
     private val alphabet: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_",

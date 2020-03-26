@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * JMH Benchmark for PersistentAVLTreeMap class.
+ */
 @OutputTimeUnit(value = TimeUnit.NANOSECONDS)
 @BenchmarkMode(Mode.AverageTime)
 @Warmup(iterations = 30, time = 300, timeUnit = TimeUnit.MILLISECONDS) // YOU MAY CHANGE ME
