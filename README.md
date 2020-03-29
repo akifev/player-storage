@@ -16,7 +16,7 @@ to add or update, delete, get a rank, and roll back.
 <!--te-->
 
 ## Overview
-This library contains the thread-safe class PlayerStorage which implements interface Storage.
+This library contains the thread-safe class PlayerStorage which implements Storage interface.
 
 ### Operations
 Class PlayerStorage implements the following methods.
